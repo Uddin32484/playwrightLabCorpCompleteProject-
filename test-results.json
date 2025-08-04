@@ -115,7 +115,7 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 25037,
+                      "duration": 19617,
                       "errors": [],
                       "stdout": [
                         {
@@ -136,7 +136,7 @@
                       ],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-08-04T07:01:36.303Z",
+                      "startTime": "2025-08-04T20:35:01.601Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -165,12 +165,12 @@
                       "workerIndex": 1,
                       "parallelIndex": 1,
                       "status": "passed",
-                      "duration": 8325,
+                      "duration": 6613,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-08-04T07:01:36.268Z",
+                      "startTime": "2025-08-04T20:35:01.566Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -213,7 +213,7 @@
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-08-04T07:01:46.222Z",
+                      "startTime": "2025-08-04T20:35:08.475Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -242,7 +242,7 @@
                       "workerIndex": 2,
                       "parallelIndex": 1,
                       "status": "timedOut",
-                      "duration": 30438,
+                      "duration": 30326,
                       "error": {
                         "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
                         "stack": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
@@ -253,11 +253,11 @@
                         },
                         {
                           "location": {
-                            "file": "E:\\2025Project\\PlaywrightLapcorp\\src\\pages\\home-page.ts",
-                            "column": 62,
-                            "line": 51
+                            "file": "E:\\2025Project\\PlaywrightLapcorp\\tests\\labCorp.spec.ts",
+                            "column": 15,
+                            "line": 37
                           },
-                          "message": "Error: locator.textContent: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.css-124gh4t')\u001b[22m\n\n\n\u001b[90m   at \u001b[39m..\\src\\pages\\home-page.ts:51\n\n\u001b[0m \u001b[90m 49 |\u001b[39m     console\u001b[33m.\u001b[39mlog(\u001b[32m'New tab URL:'\u001b[39m\u001b[33m,\u001b[39m newPage\u001b[33m.\u001b[39murl())\u001b[33m;\u001b[39m\n \u001b[90m 50 |\u001b[39m     \n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 51 |\u001b[39m     \u001b[36mconst\u001b[39m actualText \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m newPage\u001b[33m.\u001b[39mlocator(\u001b[32m'.css-124gh4t'\u001b[39m)\u001b[33m.\u001b[39mtextContent()\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                                              \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 52 |\u001b[39m     console\u001b[33m.\u001b[39mlog(\u001b[32m'Text found:'\u001b[39m\u001b[33m,\u001b[39m actualText)\u001b[33m;\u001b[39m\n \u001b[90m 53 |\u001b[39m     \n \u001b[90m 54 |\u001b[39m     expect(actualText)\u001b[33m.\u001b[39mtoContain(expectedText)\u001b[33m;\u001b[39m\u001b[0m\n\u001b[2m    at HomePage.validateNewPageText (E:\\2025Project\\PlaywrightLapcorp\\src\\pages\\home-page.ts:51:62)\u001b[22m\n\u001b[2m    at E:\\2025Project\\PlaywrightLapcorp\\tests\\labCorp.spec.ts:36:16\u001b[22m"
+                          "message": "Error: page.bringToFront: Target page, context or browser has been closed\n\n\u001b[0m \u001b[90m 35 |\u001b[39m    \u001b[36mawait\u001b[39m homePage\u001b[33m.\u001b[39mclickOnPopUp()\u001b[33m;\u001b[39m\n \u001b[90m 36 |\u001b[39m    console\u001b[33m.\u001b[39mlog(\u001b[36mawait\u001b[39m homePage\u001b[33m.\u001b[39mvalidateNewPageText(\u001b[32m'Start Your Application'\u001b[39m))\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 37 |\u001b[39m    \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mbringToFront()\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m               \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 38 |\u001b[39m     \n \u001b[90m 39 |\u001b[39m\n \u001b[90m 40 |\u001b[39m     \u001b[0m\n\u001b[2m    at E:\\2025Project\\PlaywrightLapcorp\\tests\\labCorp.spec.ts:37:15\u001b[22m"
                         }
                       ],
                       "stdout": [
@@ -269,11 +269,17 @@
                         },
                         {
                           "text": "New tab URL: https://labcorp.wd1.myworkdayjobs.com/External/job/San-Francisco-CA/Senior-Software-Engineer_2522967/apply\n"
+                        },
+                        {
+                          "text": "Text found: Start Your Application\n"
+                        },
+                        {
+                          "text": "Start Your Application\n"
                         }
                       ],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-08-04T07:01:49.520Z",
+                      "startTime": "2025-08-04T20:35:11.137Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -294,7 +300,7 @@
             },
             {
               "title": "Varify InternShip Student",
-              "ok": false,
+              "ok": true,
               "tags": [],
               "tests": [
                 {
@@ -307,40 +313,18 @@
                     {
                       "workerIndex": 3,
                       "parallelIndex": 0,
-                      "status": "timedOut",
-                      "duration": 30385,
-                      "error": {
-                        "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
-                        "stack": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
-                      },
-                      "errors": [
-                        {
-                          "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
-                        },
-                        {
-                          "location": {
-                            "file": "E:\\2025Project\\PlaywrightLapcorp\\src\\pages\\student.ts",
-                            "column": 27,
-                            "line": 23
-                          },
-                          "message": "Error: locator.click: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'Students and Graduates' })\u001b[22m\n\n\n\u001b[90m   at \u001b[39m..\\src\\pages\\student.ts:23\n\n\u001b[0m \u001b[90m 21 |\u001b[39m\n \u001b[90m 22 |\u001b[39m \u001b[36masync\u001b[39m hoverCareerLinkAndClick()\u001b[33m:\u001b[39m \u001b[33mPromise\u001b[39m\u001b[33m<\u001b[39m\u001b[36mvoid\u001b[39m\u001b[33m>\u001b[39m {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 23 |\u001b[39m    \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mstudentLink\u001b[33m.\u001b[39mclick()\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                           \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 24 |\u001b[39m    \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mdiscoverLink\u001b[33m.\u001b[39mclick()\u001b[33m;\u001b[39m\n \u001b[90m 25 |\u001b[39m }\n \u001b[90m 26 |\u001b[39m\u001b[0m\n\u001b[2m    at StudentPage.hoverCareerLinkAndClick (E:\\2025Project\\PlaywrightLapcorp\\src\\pages\\student.ts:23:27)\u001b[22m\n\u001b[2m    at E:\\2025Project\\PlaywrightLapcorp\\tests\\labCorp.spec.ts:46:26\u001b[22m"
-                        }
-                      ],
+                      "status": "passed",
+                      "duration": 11567,
+                      "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-08-04T07:02:08.936Z",
+                      "startTime": "2025-08-04T20:35:24.957Z",
                       "annotations": [],
-                      "attachments": [
-                        {
-                          "name": "error-context",
-                          "contentType": "text/markdown",
-                          "path": "E:\\2025Project\\PlaywrightLapcorp\\test-results\\labCorp-LabCorp-CareerSearch-Test-Varify-InternShip-Student-firefox\\error-context.md"
-                        }
-                      ]
+                      "attachments": []
                     }
                   ],
-                  "status": "unexpected"
+                  "status": "expected"
                 }
               ],
               "id": "1dc2e2a02b48bd035d29-a1c2e558ef487e7c0566",
@@ -378,7 +362,7 @@
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-08-04T07:02:23.584Z",
+                      "startTime": "2025-08-04T20:35:38.155Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -398,11 +382,11 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2025-08-04T07:01:32.639Z",
-    "duration": 69189.36499999999,
-    "expected": 2,
+    "startTime": "2025-08-04T20:34:59.054Z",
+    "duration": 46921.087,
+    "expected": 3,
     "skipped": 2,
-    "unexpected": 2,
+    "unexpected": 1,
     "flaky": 0
   }
 }
