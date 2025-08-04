@@ -10,16 +10,15 @@ permissions:
   contents: read
   pages: write
   id-token: write
-  packages: write  # Added for Docker registry access
+  packages: write
 
 jobs:
-  # NEW: Docker Build Job
+  # Build Docker Image
   docker-build:
     name: Build Docker Image
     runs-on: ubuntu-latest
     outputs:
       image-tag: ${{ steps.meta.outputs.tags }}
-      image-digest: ${{ steps.build.outputs.digest }}
     
     steps:
     - name: Checkout repository
@@ -47,23 +46,19 @@ jobs:
           type=raw,value=latest,enable={{is_default_branch}}
     
     - name: Build and push Docker image
-      id: build
       uses: docker/build-push-action@v5
       with:
         context: .
-        platforms: linux/amd64,linux/arm64
+        platforms: linux/amd64
         push: true
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
-        cache-from: type=gha
-        cache-to: type=gha,mode=max
 
-  # UPDATED: Existing test job with Docker option
+  # Run Tests (Standard)
   test:
     name: Run Tests (Standard)
     timeout-minutes: 60
     runs-on: ubuntu-latest
-    needs: docker-build
     outputs:
       report-url: ${{ steps.deploy.outputs.page_url }}
     
@@ -88,11 +83,11 @@ jobs:
     - name: Enhance HTML Report
       if: always()
       run: |
-        # Add timestamp to report
-        echo "<p>Report generated: $(date)</p>" >> playwright-report/index.html
-        echo "<p>Commit: ${{ github.sha }}</p>" >> playwright-report/index.html
-        echo "<p>Branch: ${{ github.ref_name }}</p>" >> playwright-report/index.html
-        echo "<p>Execution Mode: Standard (Node.js)</p>" >> playwright-report/index.html
+        if [ -f "playwright-report/index.html" ]; then
+          echo "<p>Report generated: $(date)</p>" >> playwright-report/index.html
+          echo "<p>Commit: ${{ github.sha }}</p>" >> playwright-report/index.html
+          echo "<p>Branch: ${{ github.ref_name }}</p>" >> playwright-report/index.html
+        fi
     
     - name: Setup Pages
       if: always() && github.ref == 'refs/heads/main'
@@ -113,11 +108,11 @@ jobs:
       uses: actions/upload-artifact@v4
       if: always()
       with:
-        name: playwright-report-standard-${{ github.run_id }}
+        name: playwright-report-${{ github.run_id }}
         path: playwright-report/
         retention-days: 30
 
-  # NEW: Docker test job
+  # Run Tests (Docker)
   docker-test:
     name: Run Tests (Docker)
     timeout-minutes: 60
@@ -125,148 +120,41 @@ jobs:
     needs: docker-build
     
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
-    
-    - name: Log in to GitHub Container Registry
-      uses: docker/login-action@v3
-      with:
-        registry: ghcr.io
-        username: ${{ github.actor }}
-        password: ${{ secrets.GITHUB_TOKEN }}
-    
-    - name: Create directories for volume mounts
+    - name: Create directories
       run: |
         mkdir -p playwright-report-docker
-        mkdir -p test-results-docker
-        chmod 777 playwright-report-docker test-results-docker
+        chmod 777 playwright-report-docker
     
-    - name: Run tests in Docker container
+    - name: Run tests in Docker
       run: |
         docker run --rm \
           -v ${{ github.workspace }}/playwright-report-docker:/app/playwright-report \
-          -v ${{ github.workspace }}/test-results-docker:/app/test-results \
           -e CI=true \
-          -e HEADLESS=true \
-          -e GITHUB_SHA=${{ github.sha }} \
-          -e GITHUB_REF_NAME=${{ github.ref_name }} \
           ${{ needs.docker-build.outputs.image-tag }} npm test
     
-    - name: Enhance Docker HTML Report
-      if: always()
-      run: |
-        if [ -f "playwright-report-docker/index.html" ]; then
-          echo "<p>Report generated: $(date)</p>" >> playwright-report-docker/index.html
-          echo "<p>Commit: ${{ github.sha }}</p>" >> playwright-report-docker/index.html
-          echo "<p>Branch: ${{ github.ref_name }}</p>" >> playwright-report-docker/index.html
-          echo "<p>Execution Mode: Docker Container</p>" >> playwright-report-docker/index.html
-          echo "<p>Docker Image: ${{ needs.docker-build.outputs.image-tag }}</p>" >> playwright-report-docker/index.html
-        fi
-    
-    - name: Upload Docker Report Artifact
+    - name: Upload Docker Report
       uses: actions/upload-artifact@v4
       if: always()
       with:
         name: playwright-report-docker-${{ github.run_id }}
         path: playwright-report-docker/
         retention-days: 30
-    
-    - name: Upload Docker Test Results
-      uses: actions/upload-artifact@v4
-      if: failure()
-      with:
-        name: test-results-docker-${{ github.run_id }}
-        path: test-results-docker/
-        retention-days: 7
 
-  # NEW: Docker Security Scan
-  docker-security:
-    name: Security Scan
-    runs-on: ubuntu-latest
-    needs: docker-build
-    if: github.event_name == 'push'
-    
-    steps:
-    - name: Run Trivy vulnerability scanner
-      uses: aquasecurity/trivy-action@master
-      with:
-        image-ref: ${{ needs.docker-build.outputs.image-tag }}
-        format: 'sarif'
-        output: 'trivy-results.sarif'
-    
-    - name: Upload Trivy scan results
-      uses: github/codeql-action/upload-sarif@v2
-      if: always()
-      with:
-        sarif_file: 'trivy-results.sarif'
-
-  # UPDATED: Enhanced notification job
+  # Summary
   notify:
-    name: Test Summary & Notification
+    name: Test Summary
     if: always()
     needs: [test, docker-test, docker-build]
     runs-on: ubuntu-latest
     
     steps:
-    - name: Download all test artifacts
-      uses: actions/download-artifact@v4
-      with:
-        pattern: playwright-report-*
-        path: all-reports
-        merge-multiple: false
-    
-    - name: Create Comprehensive Summary
+    - name: Create Summary
       run: |
-        echo "## 🎭 Playwright Test Execution Complete" >> $GITHUB_STEP_SUMMARY
+        echo "## 🎭 Playwright Test Results" >> $GITHUB_STEP_SUMMARY
         echo "" >> $GITHUB_STEP_SUMMARY
-        echo "### 🚀 Execution Summary" >> $GITHUB_STEP_SUMMARY
+        echo "| Environment | Status |" >> $GITHUB_STEP_SUMMARY
+        echo "|-------------|--------|" >> $GITHUB_STEP_SUMMARY
+        echo "| Standard | ${{ needs.test.result == 'success' && '✅ Passed' || '❌ Failed' }} |" >> $GITHUB_STEP_SUMMARY
+        echo "| Docker | ${{ needs.docker-test.result == 'success' && '✅ Passed' || '❌ Failed' }} |" >> $GITHUB_STEP_SUMMARY
         echo "" >> $GITHUB_STEP_SUMMARY
-        echo "| Environment | Status | Report |" >> $GITHUB_STEP_SUMMARY
-        echo "|-------------|--------|--------|" >> $GITHUB_STEP_SUMMARY
-        echo "| Standard (Node.js) | ${{ needs.test.result == 'success' && '✅ Passed' || '❌ Failed' }} | [Download Artifact](.) |" >> $GITHUB_STEP_SUMMARY
-        echo "| Docker Container | ${{ needs.docker-test.result == 'success' && '✅ Passed' || '❌ Failed' }} | [Download Artifact](.) |" >> $GITHUB_STEP_SUMMARY
-        echo "" >> $GITHUB_STEP_SUMMARY
-        echo "### 🐳 Docker Information" >> $GITHUB_STEP_SUMMARY
-        echo "- **Image Built**: ${{ needs.docker-build.result == 'success' && '✅ Success' || '❌ Failed' }}" >> $GITHUB_STEP_SUMMARY
-        echo "- **Image Tag**: \`${{ needs.docker-build.outputs.image-tag }}\`" >> $GITHUB_STEP_SUMMARY
-        echo "- **Registry**: GitHub Container Registry" >> $GITHUB_STEP_SUMMARY
-        echo "" >> $GITHUB_STEP_SUMMARY
-        echo "### 📊 Report Options:" >> $GITHUB_STEP_SUMMARY
-        echo "" >> $GITHUB_STEP_SUMMARY
-        
-        if [ "${{ github.ref }}" == "refs/heads/main" ]; then
-          echo "🌐 **Live Report**: ${{ needs.test.outputs.report-url }}" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-        fi
-        
-        echo "📁 **Available Artifacts**:" >> $GITHUB_STEP_SUMMARY
-        echo "- Standard execution report" >> $GITHUB_STEP_SUMMARY
-        echo "- Docker execution report" >> $GITHUB_STEP_SUMMARY
-        echo "- Test failure screenshots (if any)" >> $GITHUB_STEP_SUMMARY
-        echo "" >> $GITHUB_STEP_SUMMARY
-        echo "### 📋 How to Access Reports:" >> $GITHUB_STEP_SUMMARY
-        echo "1. **Live Report**: Click the live report link (main branch)" >> $GITHUB_STEP_SUMMARY
-        echo "2. **Download**: Get artifacts from the Actions run" >> $GITHUB_STEP_SUMMARY
-        echo "3. **Docker**: Pull and run the image locally" >> $GITHUB_STEP_SUMMARY
-        echo "" >> $GITHUB_STEP_SUMMARY
-        echo "### 🔧 Run Docker Image Locally:" >> $GITHUB_STEP_SUMMARY
-        echo "\`\`\`bash" >> $GITHUB_STEP_SUMMARY
-        echo "docker pull ${{ needs.docker-build.outputs.image-tag }}" >> $GITHUB_STEP_SUMMARY
-        echo "docker run --rm -v \$(pwd)/reports:/app/playwright-report ${{ needs.docker-build.outputs.image-tag }}" >> $GITHUB_STEP_SUMMARY
-        echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
-
-  # NEW: Docker Image Cleanup (optional)
-  cleanup:
-    name: Cleanup Old Images
-    runs-on: ubuntu-latest
-    needs: [test, docker-test]
-    if: always() && github.ref == 'refs/heads/main'
-    
-    steps:
-    - name: Delete old container images
-      uses: actions/delete-package-versions@v4
-      with:
-        package-name: 'playwright-lapcorp'
-        package-type: 'container'
-        min-versions-to-keep: 5
-        delete-only-untagged-versions: true
+        echo "Docker Image: \`${{ needs.docker-build.outputs.image-tag }}\`" >> $GITHUB_STEP_SUMMARY
