@@ -1,0 +1,32 @@
+{
+  "name": "playwrightlapcorp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx playwright test",
+    "test:report": "npx playwright show-report",
+    "test:report:open": "npx playwright show-report --host=localhost --port=9323",
+    "test:headed": "npx playwright test --headed",
+    "test:debug": "npx playwright test --debug",
+    "test:ui": "npx playwright test --ui",
+    "test:chromium": "npx playwright test --project=chromium",
+    "test:firefox": "npx playwright test --project=firefox",
+    "install:browsers": "npx playwright install"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@playwright/test": "^1.54.1",
+    "@types/node": "^24.1.0",
+    "@types/nodemailer": "^6.4.17",
+    "@types/xlsx": "^0.0.35",
+    "csv-parser": "^3.0.0"
+  },
+  "dependencies": {
+    "nodemailer": "^7.0.5",
+    "xlsx": "^0.18.5"
+  }
+}
