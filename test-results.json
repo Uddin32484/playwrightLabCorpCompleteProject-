@@ -1,0 +1,408 @@
+{
+  "config": {
+    "configFile": "E:\\2025Project\\PlaywrightLapcorp\\playwright.config.ts",
+    "rootDir": "E:/2025Project/PlaywrightLapcorp/tests",
+    "forbidOnly": false,
+    "fullyParallel": true,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 2
+    },
+    "preserveOutput": "always",
+    "reporter": [
+      [
+        "html",
+        {
+          "open": "never",
+          "outputFolder": "playwright-report",
+          "host": "localhost",
+          "port": 9323
+        }
+      ],
+      [
+        "line",
+        null
+      ],
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "test-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "quiet": false,
+    "projects": [
+      {
+        "outputDir": "E:/2025Project/PlaywrightLapcorp/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 2
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "E:/2025Project/PlaywrightLapcorp/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "E:/2025Project/PlaywrightLapcorp/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 2
+        },
+        "id": "firefox",
+        "name": "firefox",
+        "testDir": "E:/2025Project/PlaywrightLapcorp/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "shard": null,
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.54.1",
+    "workers": 2,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "labCorp.spec.ts",
+      "file": "labCorp.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "LabCorp CareerSearch Test",
+          "file": "labCorp.spec.ts",
+          "line": 12,
+          "column": 6,
+          "specs": [
+            {
+              "title": "serch job tittle and location",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 25037,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Job Title: Senior Software Engineer\n"
+                        },
+                        {
+                          "text": "Job Location: San Francisco, California, United States of America\n"
+                        },
+                        {
+                          "text": "New tab URL: https://labcorp.wd1.myworkdayjobs.com/External/job/San-Francisco-CA/Senior-Software-Engineer_2522967/apply\n"
+                        },
+                        {
+                          "text": "Text found: Start Your Application\n"
+                        },
+                        {
+                          "text": "Start Your Application\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-08-04T07:01:36.303Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "1dc2e2a02b48bd035d29-b29a4d64402b986f4e61",
+              "file": "labCorp.spec.ts",
+              "line": 22,
+              "column": 5
+            },
+            {
+              "title": "Varify InternShip Student",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 8325,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-08-04T07:01:36.268Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "1dc2e2a02b48bd035d29-fc021336962c3fb35791",
+              "file": "labCorp.spec.ts",
+              "line": 44,
+              "column": 5
+            },
+            {
+              "title": "verify CSV reader works",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "location": {
+                        "file": "E:\\2025Project\\PlaywrightLapcorp\\tests\\labCorp.spec.ts",
+                        "line": 53,
+                        "column": 6
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-08-04T07:01:46.222Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "1dc2e2a02b48bd035d29-000da47e4ae0e7a405bf",
+              "file": "labCorp.spec.ts",
+              "line": 53,
+              "column": 6
+            },
+            {
+              "title": "serch job tittle and location",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 1,
+                      "status": "timedOut",
+                      "duration": 30438,
+                      "error": {
+                        "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+                        "stack": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                      },
+                      "errors": [
+                        {
+                          "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                        },
+                        {
+                          "location": {
+                            "file": "E:\\2025Project\\PlaywrightLapcorp\\src\\pages\\home-page.ts",
+                            "column": 62,
+                            "line": 51
+                          },
+                          "message": "Error: locator.textContent: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.css-124gh4t')\u001b[22m\n\n\n\u001b[90m   at \u001b[39m..\\src\\pages\\home-page.ts:51\n\n\u001b[0m \u001b[90m 49 |\u001b[39m     console\u001b[33m.\u001b[39mlog(\u001b[32m'New tab URL:'\u001b[39m\u001b[33m,\u001b[39m newPage\u001b[33m.\u001b[39murl())\u001b[33m;\u001b[39m\n \u001b[90m 50 |\u001b[39m     \n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 51 |\u001b[39m     \u001b[36mconst\u001b[39m actualText \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m newPage\u001b[33m.\u001b[39mlocator(\u001b[32m'.css-124gh4t'\u001b[39m)\u001b[33m.\u001b[39mtextContent()\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                                              \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 52 |\u001b[39m     console\u001b[33m.\u001b[39mlog(\u001b[32m'Text found:'\u001b[39m\u001b[33m,\u001b[39m actualText)\u001b[33m;\u001b[39m\n \u001b[90m 53 |\u001b[39m     \n \u001b[90m 54 |\u001b[39m     expect(actualText)\u001b[33m.\u001b[39mtoContain(expectedText)\u001b[33m;\u001b[39m\u001b[0m\n\u001b[2m    at HomePage.validateNewPageText (E:\\2025Project\\PlaywrightLapcorp\\src\\pages\\home-page.ts:51:62)\u001b[22m\n\u001b[2m    at E:\\2025Project\\PlaywrightLapcorp\\tests\\labCorp.spec.ts:36:16\u001b[22m"
+                        }
+                      ],
+                      "stdout": [
+                        {
+                          "text": "Job Title: Senior Software Engineer\n"
+                        },
+                        {
+                          "text": "Job Location: San Francisco, California, United States of America\n"
+                        },
+                        {
+                          "text": "New tab URL: https://labcorp.wd1.myworkdayjobs.com/External/job/San-Francisco-CA/Senior-Software-Engineer_2522967/apply\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-08-04T07:01:49.520Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "E:\\2025Project\\PlaywrightLapcorp\\test-results\\labCorp-LabCorp-CareerSear-00b64-rch-job-tittle-and-location-firefox\\error-context.md"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "1dc2e2a02b48bd035d29-0bb5c8baccb06605e00e",
+              "file": "labCorp.spec.ts",
+              "line": 22,
+              "column": 5
+            },
+            {
+              "title": "Varify InternShip Student",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [
+                    {
+                      "workerIndex": 3,
+                      "parallelIndex": 0,
+                      "status": "timedOut",
+                      "duration": 30385,
+                      "error": {
+                        "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+                        "stack": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                      },
+                      "errors": [
+                        {
+                          "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                        },
+                        {
+                          "location": {
+                            "file": "E:\\2025Project\\PlaywrightLapcorp\\src\\pages\\student.ts",
+                            "column": 27,
+                            "line": 23
+                          },
+                          "message": "Error: locator.click: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'Students and Graduates' })\u001b[22m\n\n\n\u001b[90m   at \u001b[39m..\\src\\pages\\student.ts:23\n\n\u001b[0m \u001b[90m 21 |\u001b[39m\n \u001b[90m 22 |\u001b[39m \u001b[36masync\u001b[39m hoverCareerLinkAndClick()\u001b[33m:\u001b[39m \u001b[33mPromise\u001b[39m\u001b[33m<\u001b[39m\u001b[36mvoid\u001b[39m\u001b[33m>\u001b[39m {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 23 |\u001b[39m    \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mstudentLink\u001b[33m.\u001b[39mclick()\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                           \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 24 |\u001b[39m    \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mdiscoverLink\u001b[33m.\u001b[39mclick()\u001b[33m;\u001b[39m\n \u001b[90m 25 |\u001b[39m }\n \u001b[90m 26 |\u001b[39m\u001b[0m\n\u001b[2m    at StudentPage.hoverCareerLinkAndClick (E:\\2025Project\\PlaywrightLapcorp\\src\\pages\\student.ts:23:27)\u001b[22m\n\u001b[2m    at E:\\2025Project\\PlaywrightLapcorp\\tests\\labCorp.spec.ts:46:26\u001b[22m"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-08-04T07:02:08.936Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "E:\\2025Project\\PlaywrightLapcorp\\test-results\\labCorp-LabCorp-CareerSearch-Test-Varify-InternShip-Student-firefox\\error-context.md"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "1dc2e2a02b48bd035d29-a1c2e558ef487e7c0566",
+              "file": "labCorp.spec.ts",
+              "line": 44,
+              "column": 5
+            },
+            {
+              "title": "verify CSV reader works",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "location": {
+                        "file": "E:\\2025Project\\PlaywrightLapcorp\\tests\\labCorp.spec.ts",
+                        "line": 53,
+                        "column": 6
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-08-04T07:02:23.584Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "1dc2e2a02b48bd035d29-d5650126c4ca81b7e58f",
+              "file": "labCorp.spec.ts",
+              "line": 53,
+              "column": 6
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2025-08-04T07:01:32.639Z",
+    "duration": 69189.36499999999,
+    "expected": 2,
+    "skipped": 2,
+    "unexpected": 2,
+    "flaky": 0
+  }
+}
